@@ -1,0 +1,141 @@
+  <md-content layout-xs="column" layout="row"  >
+    <!-- Free Space -->
+    <div flex-xs="" flex-gt-xs="5" layout="column"></div>
+    <!-- Category Table -->
+    <div flex-xs="" flex-gt-xs="15" layout="column"></div>
+
+    <div flex-xs="" flex-gt-xs="25" layout="column">
+    	
+
+    	<div ng-repeat="o in products" ng-if="$even && inCondition(o)" >  
+			<md-card>
+			<img ng-src = {{o["thumbnail"]}} >
+			<div layout="row" >
+				<md-card-title > 
+					<div flex="20"> <i class="material-icons red" >radio_button_checked</i> </div>
+					<div flex="80"> <b>{{ o["product_name"] }} </b> </div>
+				</md-card-title>
+			</div>
+			<md-divider></md-divider>
+			<div layout="row" layout-fill>
+				<div flex="65">
+					 <md-card-content>
+							<md-radio-group ng-model = o["is_half"] ng-change="change($index)" >
+								<md-radio-button value="1" > Half <b> &#8377  {{ o["half_price"] }}/- </b> </md-radio-button>
+								<md-radio-button value="0"> Full <b> &#8377 {{ o["price"] }} /- </b></md-radio-button>
+							</md-radio-group>
+					 </md-card-content>
+				</div>
+				<div flex="35">
+					<md-card-actions layout="row" layout-align="center center">
+						<md-button ng-click="add(o['product'],o['is_half'],o['product_name'],$index)" aria-label="Add in cart"> <i class="fa fa-fw fa-plus-circle fa-5x "></i> </md-button>					
+					</md-card-actions>					
+				</div>
+			</div>
+			</md-card>    	
+		</div>
+    </div>
+    <div flex-xs="" flex-gt-xs="25" layout="column">
+    
+    	<div ng-repeat="o in products" ng-if="$odd && inCondition(o)" >	
+			<md-card>
+			<img ng-src = {{o["thumbnail"]}} >
+			<div layout="row" >
+				<md-card-title> 
+					<div flex="20"> <i class="material-icons red" >radio_button_checked</i> </div>
+					<div flex="80"> <b>{{ o["product_name"] }} </b> </div>
+				</md-card-title>
+			</div>
+			<md-divider></md-divider>
+			<div layout="row" >
+				<div flex="65">
+					 <md-card-content>
+							<md-radio-group ng-model = o["is_half"] ng-change="change($index)"  >
+								<md-radio-button value="1" > Half <b> &#8377  {{ o["half_price"] }}/- </b> </md-radio-button>
+								<md-radio-button value="0"> Full <b> &#8377 {{ o["price"] }} /- </b></md-radio-button>
+							</md-radio-group>
+					 </md-card-content>
+				</div>
+				<div flex="35">
+					<md-card-actions layout="row" layout-align="center center">
+						<md-button ng-click="add(o['product'],o['is_half'],o['product_name'],$index)" aria-label="Add in cart"> <i class="fa fa-fw fa-plus-circle fa-5x "></i> </md-button>					
+					</md-card-actions>					
+				</div>
+			</div>
+			</md-card>  	
+		</div>
+    </div>
+    <!-- Customer Orders -->
+    <div flex-xs="" flex-gt-xs="35" layout="column">
+    	<!-- Filter foods -->
+    	<md-card>
+
+    		<md-card-title>
+    			<h3> Filter By </h3>
+    		</md-card-title>
+    		<md-divider></md-divider>    		
+
+	   		<md-card-content>
+				<p layout="row" layout-align="center center" >
+					<md-slider-container flex="50" >
+						<span>&#8377</span>
+						<md-slider flex min="0" max="500" ng-model="MAXprice" aria-label="red" id="red-slider"></md-slider>
+						<md-input-container>
+							<input flex type="number" ng-model="MAXprice" aria-label="red" aria-controls="red-slider">
+						</md-input-container>
+					</md-slider-container>
+
+					<md-slider-container flex="50" >
+						<span>&#8377</span>
+						<md-slider flex min="0" max="500" ng-model="MAXprice" aria-label="red" id="red-slider"></md-slider>
+						<md-input-container>
+							<input flex type="number" ng-model="MAXprice" aria-label="red" aria-controls="red-slider">
+						</md-input-container>
+					</md-slider-container>
+
+				</p>
+				<div layout="row" >
+					<p flex="50" >
+						<md-switch ng-model="veg" aria-label="Veg" ng-true-value="'true'" ng-false-value="'false'" class="md-warn">
+						Vegeterian
+						</md-switch>
+					</p>
+					<p flex="50" >
+						<md-switch ng-model="half" aria-label="Half" ng-true-value="'true'" ng-false-value="'false'" class="md-warn">
+						Half AVailability
+						</md-switch>	
+					</p>
+				</div>
+    		</md-card-content>
+    	</md-card>
+    	<!-- Orders -->
+    	<md-card ng-hide="empty()" >
+    		<md-card-title>
+    			<h3> Your Orders </h3>
+    		</md-card-title>
+    		<md-divider></md-divider>
+    		<md-card-content layout-fill >
+				<div ng-repeat="order in cart" layout="row" layout-align="center center">
+						<div flex="30"> <b> {{ order['food_name'] }} </b> </div>
+						<div flex="10"> {{ order['quantity'] }} </div>
+						<div flex="10"> {{ order['half'] }} </div>
+						<div flex="20">  &#8377 {{ order['bill'] }} </div>
+						<div flex="10"><md-button class="md-icon-button"  ng-click="eadd(order)" ><i class="fa fa-fw fa-plus-circle fa-2x green" ></i></md-button></div>
+						<div flex="10"><md-button class="md-icon-button" ng-click="uremove(order['product'])" ><i class="fa fa-fw fa-minus-circle fa-2x red "></i></md-button></div>
+				</div>
+				<md-divider></md-divider>
+				<div layout="row" layout-align="center center" >
+					<div flex="70">
+						Total : &#8377 {{bill()}}/- (Tax Included)
+					</div>
+					<div flex="30">
+						<md-button class="md-raised md-primary" ng-click="checkout()" >Checkout</md-button>
+					</div>
+				</div>
+				</md-divider>
+    		</md-card-content>
+    	</md-card>
+    </div>
+    <!-- Free Space -->
+    <div flex-xs="" flex-gt-xs="1" layout="column"></div>
+  </md-content>
