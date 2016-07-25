@@ -6,6 +6,10 @@ hozbee_beta.config(function ($routeProvider) {
 			templateUrl: 'app/components/foodmain/foodmain.html',
 			controller: 'FoodmainCtrl'
 		})
+		.when('/laundry', {
+			templateUrl: 'app/components/laundry/laundry.html',
+			controller: 'LaundryCtrl'
+		})
 		;
 	
 });

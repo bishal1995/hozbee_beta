@@ -1,0 +1,37 @@
+[
+  {
+    "cloth": 1,
+    "cloth_name": "Kurta",
+    "wash_price": 14,
+    "washService": "WD",
+    "clothcategory": "M"
+  },
+  {
+    "cloth": 2,
+    "cloth_name": "Shirt",
+    "wash_price": 10,
+    "washService": "WI",
+    "clothcategory": "M"
+  },
+  {
+    "cloth": 3,
+    "cloth_name": "T-Shirt",
+    "wash_price": 5,
+    "washService": "WD",
+    "clothcategory": "M"
+  },
+  {
+    "cloth": 4,
+    "cloth_name": "Salwar",
+    "wash_price": 15,
+    "washService": "WI",
+    "clothcategory": "F"
+  },
+  {
+    "cloth": 5,
+    "cloth_name": "Bed Sheet",
+    "wash_price": 20,
+    "washService": "WD",
+    "clothcategory": "H"
+  }
+]

@@ -1,4 +1,17 @@
-  <md-content layout-xs="column" layout="row"  >
+<md-content>
+	<center><h3>*********  Food Order has never been so easy at NIT Silchar, Order Now from various varieties of standardised at HOZBEE  *********</h3></center>
+</md-content>
+<md-content layout-xs="column" layout="row" class="md-padding">	
+	<div flex="20" > </div>
+	<div flex="60" >
+        <md-input-container md-no-float class="md-block">
+          <input ng-model="dishText" placeholder="Search your dishes ...">
+        </md-input-container>
+	</div>
+	<div flex="20" ></div>
+</md-content>
+<md-divider></md-divider>
+<md-content layout-xs="column" layout="row"  >
     <!-- Free Space -->
     <div flex-xs="" flex-gt-xs="5" layout="column"></div>
     <!-- Category Table -->
@@ -6,8 +19,8 @@
 
     <div flex-xs="" flex-gt-xs="25" layout="column">
     	
-
-    	<div ng-repeat="o in products" ng-if="$even && inCondition(o)" >  
+    	<br>
+    	<div ng-repeat="o in products | filter:dishText " ng-if="$even && inCondition(o)" >  
 			<md-card>
 			<img ng-src = {{o["thumbnail"]}} >
 			<div layout="row" >
@@ -36,8 +49,8 @@
 		</div>
     </div>
     <div flex-xs="" flex-gt-xs="25" layout="column">
-    
-    	<div ng-repeat="o in products" ng-if="$odd && inCondition(o)" >	
+    	<br>
+    	<div ng-repeat="o in products | filter:dishText" ng-if="$odd && inCondition(o)" >	
 			<md-card>
 			<img ng-src = {{o["thumbnail"]}} >
 			<div layout="row" >
@@ -66,7 +79,8 @@
 		</div>
     </div>
     <!-- Customer Orders -->
-    <div flex-xs="" flex-gt-xs="35" layout="column">
+    <div flex-xs="" flex-gt-xs="35" layout="column" id="side-bar" >
+    	<br>
     	<!-- Filter foods -->
     	<md-card>
 
@@ -77,17 +91,16 @@
 
 	   		<md-card-content>
 				<p layout="row" layout-align="center center" >
-					<md-slider-container flex="50" >
-						<span>&#8377</span>
-						<md-slider flex min="0" max="500" ng-model="MAXprice" aria-label="red" id="red-slider"></md-slider>
-						<md-input-container>
-							<input flex type="number" ng-model="MAXprice" aria-label="red" aria-controls="red-slider">
-						</md-input-container>
-					</md-slider-container>
+					<md-input-container flex="33" >
+						<label>Delivered in</label>
+						<md-select ng-model="delivery">
+							<md-option ng-repeat="option in deliveryOptions" value="{{option}}" >{{option}} min </md-option>
+						</md-select>
+					</md-input-container>
 
-					<md-slider-container flex="50" >
+					<md-slider-container flex="66" >
 						<span>&#8377</span>
-						<md-slider flex min="0" max="500" ng-model="MAXprice" aria-label="red" id="red-slider"></md-slider>
+						<md-slider md-discrete flex min="0" max="500" ng-model="MAXprice" aria-label="red" step="5" id="red-slider"></md-slider>
 						<md-input-container>
 							<input flex type="number" ng-model="MAXprice" aria-label="red" aria-controls="red-slider">
 						</md-input-container>
@@ -95,14 +108,19 @@
 
 				</p>
 				<div layout="row" >
-					<p flex="50" >
+					<p flex="33" >
 						<md-switch ng-model="veg" aria-label="Veg" ng-true-value="'true'" ng-false-value="'false'" class="md-warn">
-						Vegeterian
+						Veg
 						</md-switch>
 					</p>
-					<p flex="50" >
+					<p flex="33" >
 						<md-switch ng-model="half" aria-label="Half" ng-true-value="'true'" ng-false-value="'false'" class="md-warn">
-						Half AVailability
+						Non-Veg
+						</md-switch>	
+					</p>
+					<p flex="33" >
+						<md-switch ng-model="half" aria-label="Half" ng-true-value="'true'" ng-false-value="'false'" class="md-warn">
+						Half
 						</md-switch>	
 					</p>
 				</div>
@@ -138,4 +156,4 @@
     </div>
     <!-- Free Space -->
     <div flex-xs="" flex-gt-xs="1" layout="column"></div>
-  </md-content>
+</md-content>

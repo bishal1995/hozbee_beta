@@ -71,6 +71,9 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) 
 	$scope.MAXprice = 500.0;
 	$scope.veg = "false";
 	$scope.half = "false";
+	$scope.deliveryOptions = [ 20,25,30,35,40,45,50,55,60 ];
+	$scope.delivery = 60;
+	$scope.dishText = '';
 	$scope.empty = function(){ return Cart.isEmpty(); };
 	$scope.bill = function(){ return Cart.total();};
 	$scope.inCondition = function(Tfood){
@@ -86,6 +89,8 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) 
 	$scope.checkout = function(){
 		console.log( Cart.getCart() );
 	};
+
+
 
 
 
