@@ -31,7 +31,7 @@
     }
 
     .bs-glyphicons li:hover {
-      background-color: rgba(86, 61, 124, .1);
+      background-color: white;
     }
 
     @media (min-width: 768px) {

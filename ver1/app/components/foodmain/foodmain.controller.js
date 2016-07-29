@@ -67,6 +67,7 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) 
 	$scope.uremove = function(product){
 		Cart.remove(product);
 	};
+
 	$scope.MINprice = 0.0;
 	$scope.MAXprice = 500.0;
 	$scope.veg = "false";
