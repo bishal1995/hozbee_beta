@@ -10,6 +10,10 @@ hozbee_beta.config(function ($routeProvider) {
 			templateUrl: 'app/components/laundry/laundry.html',
 			controller: 'LaundryCtrl'
 		})
+		.when('/front', {
+			templateUrl: 'app/components/front/front.html',
+			controller: 'FrontCtrl'
+		})
 		;
 	
 });

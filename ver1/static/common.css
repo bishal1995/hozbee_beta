@@ -18,7 +18,7 @@ body {
 }
 
 hr {
-    max-width: 100%;
+    max-width: 95%;
     border-color: #f05f40;
     border-width: 3px;
 }
@@ -33,7 +33,7 @@ hr.full{
 }
 hr.small{
     max-width: 220px;
-    border-color: #fff;
+    border-color: #eb3812;
     border-width: 4px; 
 }
 
@@ -81,7 +81,9 @@ p {
 section {
     padding: 100px 0;
 }
-
+.first{
+    background-color: #1AFF00 ;   
+}
 aside {
     padding: 50px 0;
 }

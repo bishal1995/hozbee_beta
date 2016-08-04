@@ -596,72 +596,83 @@
 <!-- Order Placing -->
 <div ng-show="placeOrder" ><br><br>
 	<div class="row" >
-		<div class="col-md-2" ></div>
+		<div class="col-md-1" ></div>
 		<!-- Service Selection -->
-		<div class="col-md-3" >
+		<div class="col-md-4" >
 			<h3>Select a Service : </h3><hr><br>
           <div class="row" >
           	<div class="col-md-4" ><center>
-				<md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+				<md-checkbox ng-model="services.WF" aria-label="Checkbox 1">
 					<b>Wash & Dry</b>
 				</md-checkbox>
           	<i class="fa fa-ship fa-5x" aria-hidden="true" ></i>
           	</center></div>
           	<div class="col-md-4" ><center>
-				<md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+				<md-checkbox ng-model="services.WF" aria-label="Checkbox 1">
 					<b>Dry Wash</b>
 				</md-checkbox>
-           	<i class="fa fa-ship fa-5x" aria-hidden="true" ></i>
+          	<i class="fa fa-ship fa-5x" aria-hidden="true" ></i>
           	</center></div>
           	<div class="col-md-4" ><center>
-				<md-checkbox ng-model="data.cb1" aria-label="Checkbox 1">
+				<md-checkbox ng-model="services.WI" aria-label="Checkbox 1">
 					<b>Wash & Iron</b>
 				</md-checkbox>
           	<i class="fa fa-ship fa-5x" aria-hidden="true" ></i>
           	</center></div>
-          </div>
+          </div><br><br>
+          <h4>Guildlines : </h4>
+          <ul>
+          	<li> Select atleast one service to proceed. </li>
+          	<li> You may select more than one services. </li>
+          </ul>
+
 		</div>
 		<!-- Address selection -->
-		<div class="col-md-3" >
+		<div class="col-md-3" ng-show="seladd()"  >
 			<h3>Select Address : </h3><hr><br>
 			<md-radio-group ng-model="data.group1">
-				<md-radio-button value="Apple" > <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
-				<md-radio-button value="Banana"> <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
-				<md-radio-button value="Mango"> <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
+				<md-radio-button value="Apple" id="op1" > <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
+				<md-radio-button value="Banana" id="op3"> <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
+				<md-radio-button value="Mango" id="op2"> <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
+				<md-radio-button value="new_add" id="op4"><b> New address </b></md-radio-button>
 			</md-radio-group>
-			<br><br>
-			<center><md-button class="md-raised" md-no-ink>
-				<i class="fa fa-plus-circle" aria-hidden="true"></i>  Add new Address 
-			</md-button></center>			
+			<div class="row" >
+				<div class="col-md-4" >
+					<center >
+					<md-input-container>
+						<label>Building</label>
+						<md-select ng-model="delivery">
+							<md-option ng-repeat="option in buildings" value="{{option}}" >{{option}}</md-option>
+						</md-select>
+					</md-input-container>						
+					</center>
+				</div>
+				<div class="col-md-4" >
+					<center>
+						<md-input-container>
+							<label>Room No:</label>
+							<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 6036" >
+						</md-input-container>
+					</center>					
+				</div>
+				<div class="col-md-4" >
+					<center>
+						<md-input-container>
+							<label>PIN #</label>
+							<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 788010" >
+						</md-input-container>
+					</center>				
+				</div>
+			</div>
 		</div>
 		<!--  -->
-		<div class="col-md-3" >
+		<div class="col-md-3" ng-show="seddate()" >
 			<h3>Select Date and time for pickup : </h3><hr><br>
 			<center><md-datepicker ng-model="myDate" md-placeholder="Pickup date"></md-datepicker></center><br>
-			<center>
-			<i class="fa fa-clock-o fa-3x " aria-hidden="true"></i>
-			<md-input-container>
-				<label>Time</label>		
-				<input ng-model="user.email" type="time" placeholder="Time">
-			</md-input-container></center>
 			<center><md-button class="md-raised md-primary">Confirm</md-button></center>
 			
 		</div>
 		<div class="col-md-1" ></div>
-
-
-
-
-
 	</div>
-
-
-
-
-
-
-
-
-
 <br><br><br>
 </div>
