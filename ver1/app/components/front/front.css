@@ -1,15 +1,34 @@
 .first{
-    background-color: #5A9DFA ;   
+    background-color: #FFCC00 ;   
 }
 .second{
 	background-color: #FFFFFF ;	
-      border-width: 1px;
-      border-style: solid;
-    border-color: #DBDBDB;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #DBDBDB;
 }
 .dark {
-  background-color: #E3E3E3;
+	background-color: #EDEDED;
 }
 .third {
-  background-color: #E8E8E8;
+	background-color: #E8E8E8;
+}
+.arrow{
+	background-color: #1A33F0;
+}
+.image{
+	width: 35%;
+	height : 35%;
+}
+.image2{
+	width: 45%;
+	height : 45%;
+}
+.image3{
+	width: 100%;
+	height : 100%;
+}
+.image75{
+	width: 60%;
+	height : 60%;
 }

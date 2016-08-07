@@ -46,11 +46,15 @@ hr.full{
 }
 
 .newFooter{
-    background-color:#333333;
+    background-color:#3B3B3B;
 }
 .textColor{
 
     font-family: 'Cabin', sans-serif;
     font-weight: 700;
     color: #F2F2F2;
+}
+.image5{
+  width: 25%;
+  height : 25%;
 }
