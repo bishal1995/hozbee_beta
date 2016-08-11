@@ -41,13 +41,13 @@
 </head>
 
 <body>
-
+    <!-- Header -->
     <div id="navbar" ng-controller="HeaderCtrl">
         <div ng-include src="'app/common/header/header.html'"></div>
     </div>
-
+    <!-- App view -->
     <div ng-view></div>
-
+    <!-- Footer -->
     <div class="footer" ng-controller="FooterCtrl" bottom=0  >
         <div ng-include src="'app/common/footer/footer.html'"></div>
     </div>
@@ -60,7 +60,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-aria.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-messages.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc4/angular-material.min.js"></script>
-
+    <script src="http://ngmaterial.assets.s3.amazonaws.com/svg-assets-cache.js"></script>
 
 
     <!-- Various Services and Controllers -->
@@ -68,6 +68,9 @@
     <script src="app/app.controller.js"></script>
     <script src="app/app.routes.js"></script>
     <script src="app/app.service.js"></script>
+    <!-- Header And footer -->
+    <script src="app/common/header/header.controller.js"></script>
+    <script src="app/common/footer/footer.controller.js"></script>    
     <!-- Foodmain -->
     <script src="app/components/front/front.controller.js"></script>
     <script src="app/components/front/front.directive.js"></script>
@@ -92,8 +95,6 @@
 
 
 
-    <script src="app/common/header/header.controller.js"></script>
-    <script src="app/common/footer/footer.controller.js"></script>    
 
 
 

@@ -4,3 +4,14 @@
 .navbar {
     margin-bottom: 0;
 }
+.button3{
+    background-color: #FF4747; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	border-radius: 5px;
+}

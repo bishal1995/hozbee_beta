@@ -13,21 +13,28 @@
 		<br>
 		<div class="col-md-2" ></div>
 
-		<div class="col-md-2 second" ng-class="{dark: hover1}" ng-mouseenter="hover1 = true" ng-mouseleave="hover1 = false" >
-			<br><br><img src="static/svg/laundry2.svg"  class="image">
+		<!-- Laundry Quick ways -->
+		<div class="col-md-2 show-image">
+			<br><br><img src="static/svg/laundry2.svg" class="image">
 			<h3>Laundry</h3>
-			<p class="text-muted">Tired of doing laundry, get your laundry done easily.</p><br>			
+			<p class="text-muted">Tired of doing laundry, get your laundry done easily.</p><br>
+			<button class="delete button2"   aria-label="book"  id="myBtn2">Book Pickup</button>
+		<!-- 	<button class="delete button2" ng-click="order()" id="myBtn"> Book Pickup</button> -->
+			<button class="update button2" ng-click="gotolist()">  Price lists  </button>
 		</div>
+		<!-- Foodstation Quick ways -->
 		<div class="col-md-2 second" ng-class="{dark: hover2}" ng-mouseenter="hover2 = true" ng-mouseleave="hover2 = false" >
 			<br><br><img src="static/svg/meat.svg"  class="image">
             <h3>Foodstation</h3>
             <p class="text-muted">Bored of your canteen and mess, order yummy foods for your tummy.</p>	<br>
 		</div>
+		<!-- Party Packages Quick ways -->
 		<div class="col-md-2 second" ng-class="{dark: hover3}" ng-mouseenter="hover3 = true" ng-mouseleave="hover3 = false" >
 			<br><br><img src="static/svg/balloons.svg"  class="image"> 
             <h3>Party Packages</h3>
             <p class="text-muted">Want to celebrate a party, order various things from here.</p><br>		
 		</div>
+		<!-- Cake Order Quick ways -->
 		<div class="col-md-2 second" ng-class="{dark: hover4}" ng-mouseenter="hover4 = true" ng-mouseleave="hover4 = false" >
 			<br><br><img src="static/svg/cake-1.svg"  class="image">
             <h3>Cake Order</h3>
@@ -100,3 +107,109 @@
 	</div>	
 	<br><br><br><br><br><br><br>
 </div>
+
+<!-- Popups -->
+<!-- The Laundry Quick Book -->
+<div id="myModal2" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close2">x</span>
+		<!-- Order Placing -->
+		<div>
+		<h1> <b>Book pickup.</b> </h1><hr class="line" >
+			<div class="row" >
+				<div class="col-md-1" ></div>
+				<!-- Service Selection -->
+				<div class="col-md-4" >
+					<h2 class="pull-left" ><b>Select services.</b></h2><br><br><br><hr>
+					<div class="row" >
+						<div class="col-md-1" ></div>
+						<div class="col-md-5 second" ng-class="{dark: hover11}" ng-click="hover11=!hover11"><br>
+							<center><img src="static/svg/washing.svg" class="image2"></center>
+							<center><b><h3>Wash And Fold</h3></b></center>					
+						</div>
+						<div class="col-md-5 second" ng-class="{dark: hover12}" ng-click="hover12=!hover12"><br>
+							<center><img src="static/svg/iron.svg" class="image2"></center>
+							<center><b><h3>Wash And Iron</h3></b></center>					
+						</div>
+						<div class="col-md-1" ></div>
+					</div>
+					<div class="row" >
+						<div class="col-md-1" ></div>
+						<div  class="col-md-5 second" ng-class="{dark: hover13}" ng-click="hover13=!hover13"><br>
+							<center><img src="static/svg/towel.svg" class="image2"></center>
+							<center><b><h3>Dry Wash</h3></b></center>					
+						</div>
+						<div class="col-md-5 second" ng-class="{dark: hover14}" ng-click="hover14=!hover14"><br>
+							<center><img src="static/svg/liquid-soap.svg" class="image2"></center>
+							<center><b><h3>Premium Wash</h3></b></center>					
+						</div>
+						<div class="col-md-1" ></div>
+					</div>
+				</div>
+				<!-- Address selection -->
+				<div class="col-md-3" ng-show="seladd()"  >
+					<h2 class="pull-left" ><b>Select address.</b></h2><br><br><br><hr>
+					<md-radio-group ng-model="address">
+						<md-radio-button value="add1" id="op1" > <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
+						<md-radio-button value="add2" id="op3"> <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
+						<md-radio-button value="add3" id="op2"> <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
+						<md-radio-button value="new_add" id="op4"><b> New address </b></md-radio-button>
+					</md-radio-group>
+					<div class="row" >
+						<div class="col-md-4" >
+							<center >
+							<md-input-container>
+								<label>Building</label>
+								<md-select ng-model="delivery">
+									<md-option ng-repeat="option in buildings" value="{{option}}" >{{option}}</md-option>
+								</md-select>
+							</md-input-container>						
+							</center>
+						</div>
+						<div class="col-md-4" >
+							<center>
+								<md-input-container>
+									<label>Room No:</label>
+									<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 6036" >
+								</md-input-container>
+							</center>					
+						</div>
+						<div class="col-md-4" >
+							<center>
+								<md-input-container>
+									<label>PIN #</label>
+									<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 788010" >
+								</md-input-container>
+							</center>				
+						</div>
+					</div>
+				</div>
+				<!--  -->
+				<div class="col-md-3" ng-show="seladd()" >
+					<h2 class="pull-left" ><b>Select Date.</b></h2><br><br><br><hr>
+					<center><md-datepicker ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate"></md-datepicker></center><br>
+					<center><md-button class="md-raised md-primary">Confirm</md-button></center>
+					
+				</div>
+				<div class="col-md-1" ></div>
+			</div>
+		<br>
+		<div class="row" >
+			<div class="col-md-1" ></div>
+			<div class="col-md-8" >
+				<b> <h3>Guidilines</h3> </b>
+	          <ul>
+	          	<li> Select atleast one service type to confirm your booking. You may select more than one. </li>
+	          	<li> Defult date is the same day if service booked till 2PM of the day. Else you may select any day convenient to you. </li>
+	          </ul>
+			</div>
+			<div class="col-md-3" ></div>
+		</div>
+		</div>
+  </div>
+</div>
+
+
+

@@ -21,11 +21,15 @@ body {
 }
 
 hr {
-    max-width: 95%;
+    max-width: 100%;
     border-color: #f05f40;
-    border-width: 3px;
+    border-width: 2px;
 }
-
+hr.line {
+    max-width: 100%;
+    border-color: #000000;
+    border-width: 2px;
+}
 hr.light {
     border-color: #fff;
 }
