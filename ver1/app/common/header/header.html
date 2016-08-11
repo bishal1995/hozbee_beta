@@ -9,5 +9,64 @@
       <li class="nav-item">
         <a class="nav-link textColor" href="#">CONTACT</a>
       </li>
+      <li>
+      	<button class="button3" id="loginBtn" > LOGIN </button>
+      </li>
     </ul>
 </nav>
+
+
+<!-- Login/SignUp Forn -->
+
+<div id="credModal" class="modal">
+	<div class="modal-content2">
+	<span class="cross">x</span>
+		<!-- Order Placing -->
+
+
+		<div class="row" >
+			<div class="col-md-2" ></div>
+			<div class="col-md-8" >
+
+			<ul class="nav nav-tabs row">
+			  <li class="col-md-6" ><a href=""> <center>Login</center> </a></li>
+			  <li class="col-md-6" ><a href=""> <center>Signup</center> </a></li>
+			</ul>
+				<!-- Login Form -->
+				<div >
+					<md-content layout-padding="">
+						<h3 class="pull-left" > <b> Login ..</b> </h3><br><br><br><br>
+					    <form name="projectForm">
+					      <md-input-container class="md-block">
+					        <label>Email</label>
+					        <md-icon md-svg-src="static/svg/users.svg" class="name"></md-icon>
+					        <input md-maxlength="20" required="" md-no-asterisk="" name="description" ng-model="project.description">
+					        <div ng-messages="projectForm.description.$error">
+					          <div ng-message="required">This is required.</div>
+					          <div ng-message="md-maxlength"> The email cannot be greater than 30 character </div>
+					        </div>
+					      </md-input-container>
+
+					      <md-input-container class="md-block">
+					        <label>Password</label>
+					        <md-icon md-svg-src="static/svg/key.svg" class="name"></md-icon>
+					        <input required="" name="clientName" ng-model="project.clientName" type="password"  >
+					        <div ng-messages="projectForm.clientName.$error">
+					          <div ng-message="required">This is required.</div>
+					        </div>
+					      </md-input-container>
+					      <center><md-button class="loginbt"> Login </md-button></center>
+					    </form>
+					  </md-content>
+				</div>
+
+
+
+
+			</div>
+			<div class="col-md-2" ></div>
+
+		</div>
+
+	</div>
+</div>

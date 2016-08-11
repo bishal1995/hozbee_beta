@@ -41,10 +41,9 @@
 </head>
 
 <body>
-    <!-- Header -->
-    <div id="navbar" ng-controller="HeaderCtrl">
-        <div ng-include src="'app/common/header/header.html'"></div>
-    </div>
+    <!-- Header Directive -->
+    <header-modal></header-modal>
+
     <!-- App view -->
     <div ng-view></div>
     <!-- Footer -->
@@ -70,6 +69,10 @@
     <script src="app/app.service.js"></script>
     <!-- Header And footer -->
     <script src="app/common/header/header.controller.js"></script>
+    <script src="app/common/header/header.directive.js"></script>
+
+
+
     <script src="app/common/footer/footer.controller.js"></script>    
     <!-- Foodmain -->
     <script src="app/components/front/front.controller.js"></script>
