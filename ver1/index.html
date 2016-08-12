@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="hozbee_beta" ng-cloak>
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Hozbee Services</title>
-
-
-
     <!-- Custom Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -23,16 +17,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="static/common.css">
-    <!-- Module's css -->
-    
+    <!-- Module's css -->    
     <link rel="stylesheet" type="text/css" href="app/common/header/header.css">
     <link rel="stylesheet" type="text/css" href="app/common/footer/footer.css">
     <link rel="stylesheet" type="text/css" href="app/components/foodmain/foodmain.css">
     <link rel="stylesheet" type="text/css" href="app/components/laundry/laundry.css">
     <link rel="stylesheet" type="text/css" href="app/components/front/front.css">
     <link rel="stylesheet" type="text/css" href="app/components/laundryservice/laundryservice.css">
-
-
+    <link rel="stylesheet" type="text/css" href="app/components/orders/orders.css">
 
     <title>PPTS Control Center</title>
     <!-- Tell the browser to be responsive to screen width -->
@@ -43,14 +35,12 @@
 <body>
     <!-- Header Directive -->
     <header-modal></header-modal>
-
     <!-- App view -->
     <div ng-view></div>
     <!-- Footer -->
     <div class="footer" ng-controller="FooterCtrl" bottom=0  >
         <div ng-include src="'app/common/footer/footer.html'"></div>
     </div>
-
     <!--  AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.js"></script>
@@ -67,12 +57,10 @@
     <script src="app/app.controller.js"></script>
     <script src="app/app.routes.js"></script>
     <script src="app/app.service.js"></script>
-    <!-- Header And footer -->
+    <!-- Header-->
     <script src="app/common/header/header.controller.js"></script>
     <script src="app/common/header/header.directive.js"></script>
-
-
-
+    <!-- Footer -->
     <script src="app/common/footer/footer.controller.js"></script>    
     <!-- Foodmain -->
     <script src="app/components/front/front.controller.js"></script>
@@ -90,15 +78,10 @@
     <script src="app/components/laundryservice/laundryservice.controller.js"></script>
     <script src="app/components/laundryservice/laundryservice.directive.js"></script>
     <script src="app/components/laundryservice/laundryservice.service.js"></script>
-
-
-
-
-
-
-
-
-
+    <!-- Orders -->
+    <script src="app/components/orders/orders.controller.js"></script>
+    <script src="app/components/orders/orders.directive.js"></script>
+    <script src="app/components/orders/orders.service.js"></script>
 
 
 

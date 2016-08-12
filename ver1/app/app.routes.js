@@ -18,6 +18,10 @@ hozbee_beta.config(function ($routeProvider) {
 			templateUrl: 'app/components/laundryservice/laundryservice.html',
 			controller: 'LaundryserviceCtrl'
 		})
+		.when('/orders', {
+			templateUrl: 'app/components/orders/orders.html',
+			controller: 'OrdersCtrl'
+		})
 		;
 	
 });

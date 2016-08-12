@@ -886,10 +886,10 @@
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-  <div class="modal-content">
+  <div class="modal-content" >
     <span class="close">x</span>
 		<!-- Order Placing -->
-		<div >
+		<div ng-show="placeor" >
 		<h1> <b>Book pickup.</b> </h1><hr class="line" >
 
 			<div class="row" >
@@ -964,7 +964,7 @@
 				<div class="col-md-3" ng-show="seladd()" >
 					<h2 class="pull-left" ><b>Select Date.</b></h2><br><br><br><hr>
 					<center><md-datepicker ng-model="myDate" md-placeholder="Enter date" md-min-date="minDate"></md-datepicker></center><br>
-					<center><md-button class="md-raised md-primary">Confirm</md-button></center>
+					<center><md-button class="md-raised md-primary" ng-click="confirnOrder()" >Confirm</md-button></center>
 					
 				</div>
 				<div class="col-md-1" ></div>
@@ -985,5 +985,23 @@
 
 		</div>
 		</div>
+
+			  <!-- Order Confirmation -->
+			  <div class="row"  ng-hide="placeor" >
+		  		  <div class="col-md-4" ></div>
+				  <div class="col-md-4" >
+				  	<h3> <b>Order Details.</b> </h3>
+				  	<p>
+				  		Order Id : 1234<br>
+				  		Scheduled PickUP : 12-08-2016 , 5:00 PK<br>
+				  		Service requested :  WD , WI<br>
+				  		<br>
+				  		Thank You
+				  	</p>
+				  	<center><md-button class="md-raised md-primary" ng-click="gotoOrders()" >Trace Orders</md-button></center>
+				  	
+				  </div>
+		  		  <div class="col-md-4" ></div>
+			  </div>
   </div>
 </div>

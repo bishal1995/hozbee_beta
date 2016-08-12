@@ -25,15 +25,15 @@
 
 
 		<div class="row" >
-			<div class="col-md-2" ></div>
-			<div class="col-md-8" >
+			<div class="col-md-1" ></div>
+			<div class="col-md-10" >
 
 			<ul class="nav nav-tabs row">
-			  <li class="col-md-6" ><a href=""> <center>Login</center> </a></li>
-			  <li class="col-md-6" ><a href=""> <center>Signup</center> </a></li>
+			  <li class="col-md-6" ><a href=""  ng-click="loginPress()" > <center>Login</center> </a></li>
+			  <li class="col-md-6" ><a href="" ng-click="signupPress()" > <center>Signup</center> </a></li>
 			</ul>
 				<!-- Login Form -->
-				<div >
+				<div ng-show="showLogin" >
 					<md-content layout-padding="">
 						<h3 class="pull-left" > <b> Login ..</b> </h3><br><br><br><br>
 					    <form name="projectForm">
@@ -55,16 +55,88 @@
 					          <div ng-message="required">This is required.</div>
 					        </div>
 					      </md-input-container>
-					      <center><md-button class="loginbt"> Login </md-button></center>
+					      <md-button class="loginbt pull-right"> Login </md-button>
 					    </form>
 					  </md-content>
+				</div>
+
+				<!-- Registrstion Form -->
+
+				<div ng-hide="showLogin" >
+					<md-content layout-padding="">
+						<h3 class="pull-left" > <b> Signup ..</b> </h3><br><br><br><br>
+					    <form name="projectForm">
+					      <md-input-container class="md-block">
+					        <label>Firstname</label>
+					        <md-icon md-svg-src="static/svg/note.svg" class="name"></md-icon>
+					        <input md-maxlength="20" required="" md-no-asterisk="" name="description" ng-model="project.description">
+					        <div ng-messages="projectForm.description.$error">
+					          <div ng-message="required">This is required.</div>
+					          <div ng-message="md-maxlength"> The email cannot be greater than 30 character </div>
+					        </div>
+					      </md-input-container>
+					      <md-input-container class="md-block">
+					        <label>Lastname</label>
+					        <md-icon md-svg-src="static/svg/note.svg" class="name"></md-icon>
+					        <input md-maxlength="20" required="" md-no-asterisk="" name="description" ng-model="project.description">
+					        <div ng-messages="projectForm.description.$error">
+					          <div ng-message="required">This is required.</div>
+					          <div ng-message="md-maxlength"> The email cannot be greater than 30 character </div>
+					        </div>
+					      </md-input-container>
+					      <md-input-container class="md-block">
+					        <label>Email</label>
+					        <md-icon md-svg-src="static/svg/email.svg" class="name"></md-icon>
+					        <input md-maxlength="20" required="" md-no-asterisk="" name="description" ng-model="project.description">
+					        <div ng-messages="projectForm.description.$error">
+					          <div ng-message="required">This is required.</div>
+					          <div ng-message="md-maxlength"> The email cannot be greater than 30 character </div>
+					        </div>
+					      </md-input-container>
+					      <md-input-container class="md-block">
+					        <label>Phone #</label>
+					        <md-icon md-svg-src="static/svg/smartphone _1.svg" class="name"></md-icon>
+					        <input md-maxlength="20" required="" md-no-asterisk="" name="description" ng-model="project.description">
+					        <div ng-messages="projectForm.description.$error">
+					          <div ng-message="required">This is required.</div>
+					          <div ng-message="md-maxlength"> The email cannot be greater than 30 character </div>
+					        </div>
+					      </md-input-container>
+
+					      <md-input-container class="md-block">
+					        <label>Password</label>
+					        <md-icon md-svg-src="static/svg/key.svg" class="name"></md-icon>
+					        <input required="" name="clientName" ng-model="project.clientName" type="password"  >
+					        <div ng-messages="projectForm.clientName.$error">
+					          <div ng-message="required">This is required.</div>
+					        </div>
+					      </md-input-container>
+					      <md-input-container class="md-block">
+					        <label>Retype Password</label>
+					        <md-icon md-svg-src="static/svg/key.svg" class="name"></md-icon>
+					        <input required="" name="clientName" ng-model="project.clientName" type="password"  >
+					        <div ng-messages="projectForm.clientName.$error">
+					          <div ng-message="required">This is required.</div>
+					        </div>
+					      </md-input-container>
+
+					      <md-button class="loginbt pull-right"> Signup </md-button>
+					    </form>
+					  </md-content>					
+
+
+
 				</div>
 
 
 
 
+
+
+
+
 			</div>
-			<div class="col-md-2" ></div>
+			<div class="col-md-1" ></div>
 
 		</div>
 

@@ -3,7 +3,7 @@
 hozbee_beta.controller('FrontCtrl', ['$scope','$location','$mdDialog','$mdMedia', function ($scope,$location,$mdDialog,$mdMedia) {
 	console.log('FrontCtrl created');
 	$scope.gotolist = function(){
-		$location.path('laundryservice')
+		$location.path('laundryservice');
 	};
 	$scope.placeOrder = false;
 	$scope.hover11 = false;
