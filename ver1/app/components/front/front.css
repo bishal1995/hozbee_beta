@@ -33,8 +33,12 @@
 	height : 60%;
 }
 .downIcon{
-    width : 100%;
-    height: 80%;
+    width : 50%;
+    height: 50%;
+}
+.bee{
+    width : 50%;
+    height: 50%;
 }
 div.show-image {
 	background-color: #FFFFFF ;	

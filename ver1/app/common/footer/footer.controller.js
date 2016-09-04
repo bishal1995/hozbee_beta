@@ -7,4 +7,6 @@ hozbee_beta.controller('FooterCtrl', ['$scope', function ($scope) {
 
 
 
+
+
 }]);

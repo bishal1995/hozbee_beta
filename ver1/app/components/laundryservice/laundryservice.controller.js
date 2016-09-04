@@ -1,16 +1,21 @@
 'use strict';
 
-hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','$mdMedia', function ($scope,$location,$mdDialog,$mdMedia,$event) {
+hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','$mdMedia','API_CONF','LAUNDRY_CONF','LAUNDRY_SERVICE', function ($scope,$location,$mdDialog,$mdMedia,API_CONF,LAUNDRY_CONF,LAUNDRY_SERVICE) {
 	console.log('LaundryserviceCtrl Created');
+	console.log( API_CONF._API_ + LAUNDRY_CONF._API_ );
+
+
 
 	$scope.showCatalogue = true;
 	$scope.placeOrder = false;
-	$scope.hover1 = false;
-	$scope.hover2 = false;
-	$scope.hover3 = false;
-	$scope.hover4 = false;
-	$scope.address = "add1";
-
+	//Selected Service
+	$scope.SelLaundryService = {
+		ser1 : false,
+		ser2 : false,
+		ser3 : false,
+		ser4 : false,
+	};
+	// Defining date
 	$scope.myDate = new Date();
 	$scope.minDate = new Date(
 		$scope.myDate.getFullYear(),
@@ -24,6 +29,7 @@ hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','
 		console.log('Order initiated');
 
 	};
+	// Available Building
 	$scope.buildings = [ 
 						'Hostel-1',	
 						'Hostel-2',	
@@ -37,15 +43,10 @@ hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','
 						'GH-1',	
 						'GH-2',	
 					 ];
-	$scope.services = {
-		WF : false,
-		DW : false,
-		WI : false
-	};
+	// Enables the Address option for atleast selecting a service
 	$scope.seladd = function(){
-		return $scope.hover1 || $scope.hover2 || $scope.hover3 || $scope.hover4 ;
+		return $scope.SelLaundryService.ser1 || $scope.SelLaundryService.ser2 || $scope.SelLaundryService.ser3 || $scope.SelLaundryService.ser4 ;
 	};
-
 
 	var modal = document.getElementById('myModal');
 	var btn = document.getElementById("myBtn");
@@ -65,33 +66,89 @@ hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','
 	    }
 	}
 	$scope.placeor = true;
+	//Find Month number
+	$scope.findMonth = function(monthName){
+		var MONTH = '';
+		switch(monthName){
+			case 'Jan' : 
+				MONTH = '01';
+				break;
+			case 'Feb' : 
+				MONTH = '02';
+				break;
+			case 'Mar' : 
+				MONTH = '03';
+				break;
+			case 'Apr' : 
+				MONTH = '04';
+				break;
+			case 'May' : 
+				MONTH = '05';
+				break;
+			case 'Jun' : 
+				MONTH = '06';
+				break;
+			case 'Jul' : 
+				MONTH = '07';
+				break;
+			case 'Aug' : 
+				MONTH = '08';
+				break;
+			case 'Sep' : 
+				MONTH = '09';
+				break;
+			case 'Oct' : 
+				MONTH = '10';
+				break;
+			case 'Nov' : 
+				MONTH = '11';
+				break;
+			case 'Dec' : 
+				MONTH = '12';
+				break;
+			default : MONTH  = '12';
+		}
+		return MONTH ;
+	};
+	// Confirn order function
 	$scope.confirnOrder = function(){
 		$scope.placeor =  false ;
+		// Date Format Processing to : YYYY-MM-DD
+		var date = String($scope.myDate);
+		$scope.dateField = date.substring(4,15);
+		$scope.DAT = date.substring(8,10);
+		$scope.MON = $scope.findMonth( date.substring(4,7));
+		$scope.YER = date.substring(11,15);
+		$scope.PickupDate = $scope.YER + '-' + $scope.MON + '-' + $scope.DAT;
+		//Selected Service object , intitializing to '0' and then processing
+		$scope.SelSer = {};
+		$scope.SelSer.ser1 = '0';
+		$scope.SelSer.ser2 = '0';
+		$scope.SelSer.ser3 = '0';
+		$scope.SelSer.ser4 = '0';
+		if ( $scope.SelLaundryService.ser1 == true ) { $scope.SelSer.ser1 = '1' };
+		if ( $scope.SelLaundryService.ser2 == true ) { $scope.SelSer.ser2 = '1' };
+		if ( $scope.SelLaundryService.ser3 == true ) { $scope.SelSer.ser3 = '1' };
+		if ( $scope.SelLaundryService.ser4 == true ) { $scope.SelSer.ser4 = '1' };
+		//Address , default 1 , later request it from form
+		$scope.PickupAdd = '1';
+		// Final order details
+		$scope.LaundryOrder = {
+			SelService : $scope.SelSer,
+			date : $scope.PickupDate,
+			address : $scope.PickupAdd
+		};
+		// Using Confirn Laundry Order Service
+		LAUNDRY_SERVICE.setValue($scope.LaundryOrder);
+		LAUNDRY_SERVICE.confirmOrder();
+
+		//console.log( $scope.LaundryOrder );
+		//console.log( $scope.YER + '-' + $scope.MON + '-' + $scope.DAT );
+
 	};
 	$scope.gotoOrders = function(){
 		$location.path('orders');
 	};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }]);
+
