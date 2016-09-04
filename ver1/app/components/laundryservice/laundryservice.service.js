@@ -13,8 +13,16 @@ hozbee_beta.value('LAUNDRY_ORDER', {
 	address : '0',
 	date : 'YYYY-MM-DD',
 });
+hozbee_beta.value('CONFIRMED_LORDER', {
+	corder_id : '0',
+	pickupDate : 'YYYY-MM-DD',
+	address : '0',
+	reqServices : '0000',
+	// can add more details
+});
+
 // Laundry PickUP order Confirmation
-hozbee_beta.factory('LAUNDRY_SERVICE', ['API_CONF','LAUNDRY_CONF','LAUNDRY_ORDER','$http',function (API_CONF,LAUNDRY_CONF,LAUNDRY_ORDER,$http) {
+hozbee_beta.factory('LAUNDRY_SERVICE', ['API_CONF','LAUNDRY_CONF','LAUNDRY_ORDER','USER_SERVICE','CONFIRMED_LORDER','$http',function (API_CONF,LAUNDRY_CONF,LAUNDRY_ORDER,USER_SERVICE,CONFIRMED_LORDER,$http) {
 	return {
 
 		getLaundryCatalogue : function(){
@@ -33,7 +41,7 @@ hozbee_beta.factory('LAUNDRY_SERVICE', ['API_CONF','LAUNDRY_CONF','LAUNDRY_ORDER
 		confirmOrder : function(){
 			// get this value from service
 			var headers = {
-				'Authorization' : 'Token ' + "4026d7bb5f3b48d5c7426224f2a0280bf142c8ab"
+				'Authorization' : 'Token ' + USER_SERVICE.getToken()
 			};
 			// Configuring http object for Http call
 			var config = {
@@ -46,13 +54,20 @@ hozbee_beta.factory('LAUNDRY_SERVICE', ['API_CONF','LAUNDRY_CONF','LAUNDRY_ORDER
 			$http(config)
 				.then(
 					function(response){
-						console.log(response);
+						//console.log(response);
+						CONFIRMED_LORDER.corder_id = response.data.order_info.id ;
+						CONFIRMED_LORDER.pickupDate = response.data.order_info.pickupDate ;
+						CONFIRMED_LORDER.address = response.data.order_info.address ;
+						CONFIRMED_LORDER.reqServices = response.data.order_info.reqService ;
 					},
 					function(){
 						console.log('Some Error Ocured');
 					}
 				);
 
+		},
+		getConfirmOrder : function(){
+			return CONFIRMED_LORDER;
 		}
 
 	};

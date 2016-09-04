@@ -1,6 +1,6 @@
 'use strict';
 
-hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','$mdMedia','API_CONF','LAUNDRY_CONF','LAUNDRY_SERVICE', function ($scope,$location,$mdDialog,$mdMedia,API_CONF,LAUNDRY_CONF,LAUNDRY_SERVICE) {
+hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','$mdMedia','API_CONF','LAUNDRY_CONF','CONFIRMED_LORDER','LAUNDRY_SERVICE','USER_SERVICE', function ($scope,$location,$mdDialog,$mdMedia,API_CONF,LAUNDRY_CONF,CONFIRMED_LORDER,LAUNDRY_SERVICE,USER_SERVICE) {
 	console.log('LaundryserviceCtrl Created');
 	console.log( API_CONF._API_ + LAUNDRY_CONF._API_ );
 
@@ -22,7 +22,6 @@ hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','
 		$scope.myDate.getMonth(),
 		$scope.myDate.getDate()
 	);
-
 	$scope.order = function(){
 		$scope.showCatalogue = false;
 		$scope.placeOrder = true;
@@ -44,10 +43,13 @@ hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','
 						'GH-2',	
 					 ];
 	// Enables the Address option for atleast selecting a service
+	//getting addresses from USER_SERVICE
+	$scope.address = '';
+	$scope.addresses = USER_SERVICE.getInfo().address;
+	// For maintainging 
 	$scope.seladd = function(){
 		return $scope.SelLaundryService.ser1 || $scope.SelLaundryService.ser2 || $scope.SelLaundryService.ser3 || $scope.SelLaundryService.ser4 ;
 	};
-
 	var modal = document.getElementById('myModal');
 	var btn = document.getElementById("myBtn");
 	var span = document.getElementsByClassName("close")[0];
@@ -120,7 +122,7 @@ hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','
 		$scope.MON = $scope.findMonth( date.substring(4,7));
 		$scope.YER = date.substring(11,15);
 		$scope.PickupDate = $scope.YER + '-' + $scope.MON + '-' + $scope.DAT;
-		//Selected Service object , intitializing to '0' and then processing
+		//Selected Service object , intitializing to '0' and then processing - can add Mode services .
 		$scope.SelSer = {};
 		$scope.SelSer.ser1 = '0';
 		$scope.SelSer.ser2 = '0';
@@ -130,22 +132,20 @@ hozbee_beta.controller('LaundryserviceCtrl', ['$scope','$location','$mdDialog','
 		if ( $scope.SelLaundryService.ser2 == true ) { $scope.SelSer.ser2 = '1' };
 		if ( $scope.SelLaundryService.ser3 == true ) { $scope.SelSer.ser3 = '1' };
 		if ( $scope.SelLaundryService.ser4 == true ) { $scope.SelSer.ser4 = '1' };
-		//Address , default 1 , later request it from form
-		$scope.PickupAdd = '1';
 		// Final order details
 		$scope.LaundryOrder = {
 			SelService : $scope.SelSer,
 			date : $scope.PickupDate,
-			address : $scope.PickupAdd
+			address : $scope.address
 		};
 		// Using Confirn Laundry Order Service
 		LAUNDRY_SERVICE.setValue($scope.LaundryOrder);
 		LAUNDRY_SERVICE.confirmOrder();
-
-		//console.log( $scope.LaundryOrder );
-		//console.log( $scope.YER + '-' + $scope.MON + '-' + $scope.DAT );
-
 	};
+
+	$scope.corderid = LAUNDRY_SERVICE.getConfirmOrder();
+	console.log($scope.corderid);
+
 	$scope.gotoOrders = function(){
 		$location.path('orders');
 	};

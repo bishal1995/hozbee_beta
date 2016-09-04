@@ -917,10 +917,13 @@
 				<div class="col-md-3" ng-show="seladd()"  >
 					<h2 class="pull-left" ><b>Select address.</b></h2><br><br><br><hr>
 					<md-radio-group ng-model="address">
-						<md-radio-button value="add1" id="op1" > <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
-						<md-radio-button value="add2" id="op3"> <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
-						<md-radio-button value="add3" id="op2"> <b>HOSTEl-6 , Room # 6036, PIN : 788010  </b></md-radio-button>
+
+						<md-radio-button ng-repeat = "add in addresses" ng-value = add.add_id arai-level = {{add.add_id}} >
+						  {{ add.building }} , Room no. : {{ add.room }} , PIN : {{ add.pin }}
+						</md-radio-button>
+						<!-- Build a new add address function here -->
 						<md-radio-button value="new_add" id="op4"><b> New address </b></md-radio-button>
+
 					</md-radio-group>
 					<div class="row" >
 						<div class="col-md-4" >
@@ -983,10 +986,8 @@
 				  <div class="col-md-4" >
 				  	<h3> <b>Order Details.</b> </h3>
 				  	<p>
-				  		Order Id : 1134<br>
-				  		Scheduled PickUP : 12-08-2016 , 5:00 PK<br>
-				  		Service requested :  WD , WI<br>
-				  		<br>
+				  		Order Id : {{ corderid.corder_id }}  <br>
+				  		Scheduled PickUP : {{ corderid.pickupDate }} , 5:00 PM <br>
 				  		Thank You
 				  	</p>
 				  	<center><md-button class="md-raised md-primary" ng-click="gotoOrders()" >Trace Orders</md-button></center>

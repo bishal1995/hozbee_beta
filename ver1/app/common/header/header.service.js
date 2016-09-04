@@ -27,11 +27,33 @@ hozbee_beta.factory('USER_SERVICE', ['API_CONF','LOGIN_API','USER_STATE', functi
 		},
 		getInfo : function(){
 			// Getting Customer Bio-Info from Cookies
-			console.log('Getting Customer Bio-Info from Cookies');
-
+			// Dummy address variables later get from cookies
+			var USERINF = {};
+			USERINF.address = [
+				{ 
+					add_id : '1',
+					building : 'Hostel - 7',
+					room : '6036',
+					pin : '788010'
+				},
+				{ 
+					add_id : '2',
+					building : 'Hostel - 8',
+					room : '8036',
+					pin : '788010'
+				},
+				{ 
+					add_id : '3',
+					building : 'Hostel - 9',
+					room : '9036',
+					pin : '788010'
+				}
+			];
+			return USERINF;
 		},
 		getToken : function(){
 			//take from Cookies if cookie not found redirect to Login Page
+			return "4026d7bb5f3b48d5c7426224f2a0280bf142c8ab";
 			console.log('Getting Token');
 
 		},
