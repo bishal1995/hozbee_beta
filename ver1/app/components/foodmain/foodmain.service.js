@@ -1,10 +1,101 @@
 'use strict';
-
-hozbee_beta.factory('Cart', ['$window' ,function ($window) {
+// Food APIS
+hozbee_beta.constant('FOOD_CONF',{
+	_PRODET_API_ : 'products/productDetails/',
+	_CATDET_API_ : 'products/categoryDetails/',
+	_ADDCART_API_ : 'sales/createCart/',
+	_CNFCART_API_ : 'sales/confirmOrder/',
+});
+// Cart Content
+hozbee_beta.value('CART_CONTENT',{
+	cart : [],
+	key : 'value',
+});
+hozbee_beta.value('CNFORDER',{
+	key :'value',
+});
+// cart servcice
+hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERVICE','$http',function ($window,API_CONF,FOOD_CONF,USER_SERVICE,$http) {
 		// Initial Empty cart
 		var cart = [];
 		var CartDetails = [];
 		return {
+			// Get food catalogue
+			getCatelogue : function(){
+				var prodDet = {};
+				var catDet = {};
+				var comCatalogue = [];
+				// getting product details
+				var headers = {
+					'area' : '1',		// later get from personal Info
+				};
+				var config = {
+					method : 'GET',
+					url :  API_CONF._API_ + FOOD_CONF._PRODET_API_ ,
+					headers : headers
+				};
+				$http(config)
+					.then(
+						function(response){
+							prodDet = response.data;
+							//console.log( prodDet );
+						},
+						function(){
+							console.log('Some Error');
+						}
+					);							
+				// getting category data
+				var config = {
+					method : 'GET',
+					url :  API_CONF._API_ + FOOD_CONF._CATDET_API_ ,
+					headers : headers
+				};
+				$http(config)
+					.then(
+						function(response){
+							catDet = response.data;
+							//console.log( catDet );
+							// Building Category
+							for ( var cat in catDet ){
+								if( comCatalogue.length != 0 ){
+									var found = false;
+									for( var obj in comCatalogue ){
+										if( comCatalogue[obj].id == catDet[cat].category_id ){
+											found = true;
+											break;
+										}
+										else
+											continue;
+									}
+									if( found == true )
+										continue;
+									else{
+										comCatalogue.push({
+											id : catDet[cat].category_id,
+											name : catDet[cat].category_name,
+											display : false
+										});
+									}
+								}
+								else{
+									comCatalogue.push({
+										id : catDet[cat].category_id,
+										name : catDet[cat].category_name,
+											display : false
+									});
+								}
+							};
+							console.log(comCatalogue);					
+
+
+						},
+						function(){
+							console.log('Some Error');
+						}
+					);
+
+
+			},
 			adds : function(product_id,price){
 				for ( var item in cart ){
 					if(cart[item]["product"] == product_id ){
@@ -158,4 +249,4 @@ hozbee_beta.factory('Cart', ['$window' ,function ($window) {
 					return false;
 			}
 		};
-}]);
+}]); 

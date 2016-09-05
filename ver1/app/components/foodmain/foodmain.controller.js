@@ -1,6 +1,6 @@
 'use strict';
 
-hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) {
+hozbee_beta.controller('FoodmainCtrl', ['$scope','CART_SERVICE', function ($scope,CART_SERVICE) {
  	// Dummy data get them by HTTP get
 	$scope.foods = [];
 	var num = 40;
@@ -22,11 +22,11 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) 
 	}
 	//Process data and create 
 	var date = new Date();
-	$scope.time = Cart.strtime(date.toTimeString().substr(0,8));
+	$scope.time = CART_SERVICE.strtime(date.toTimeString().substr(0,8));
 	var no_product = $scope.foods.length;
 	$scope.products = [];
 	for ( var k = 0 ; k < no_product ; k++ ){
-		if( Cart.strtime($scope.foods[k]["available_from"]) < $scope.time && Cart.strtime($scope.foods[k]["available_to"]) > $scope.time )
+		if( CART_SERVICE.strtime($scope.foods[k]["available_from"]) < $scope.time && CART_SERVICE.strtime($scope.foods[k]["available_to"]) > $scope.time )
 			$scope.products.push({
 				active : JSON.parse($scope.foods[k]["active"]),
 				product: $scope.foods[k]["product"],
@@ -43,21 +43,21 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) 
 		else
 			continue;
 	}
-	$scope.cart = Cart.getCartDetails();
-	$scope.Rcart = Cart.getCart();
+	$scope.cart = CART_SERVICE.getCartDetails();
+	$scope.Rcart = CART_SERVICE.getCart();
 	$scope.add = function(product,half,name,index){
 		if ( half == "0" )
-			Cart.add(product,half,$scope.products[index]["price"],name);
+			CART_SERVICE.add(product,half,$scope.products[index]["price"],name);
 		else
-			Cart.add(product,half,$scope.products[index]["half_price"],name);
+			CART_SERVICE.add(product,half,$scope.products[index]["half_price"],name);
 	};
 	$scope.eadd = function(product){
 		for ( var item in $scope.products ){
 			if( product['product'] == $scope.products[item]['product'] ){
 				if( product['is_half'] == "1" )
-					Cart.adds(product['product'],$scope.products[item]['half_price']);
+					CART_SERVICE.adds(product['product'],$scope.products[item]['half_price']);
 				else
-					Cart.adds(product['product'],$scope.products[item]['price']);
+					CART_SERVICE.adds(product['product'],$scope.products[item]['price']);
 				break;
 			}
 			else
@@ -65,7 +65,7 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) 
 		}
 	};
 	$scope.uremove = function(product){
-		Cart.remove(product);
+		CART_SERVICE.remove(product);
 	};
 
 	$scope.MINprice = 0.0;
@@ -75,8 +75,8 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) 
 	$scope.deliveryOptions = [ 20,25,30,35,40,45,50,55,60 ];
 	$scope.delivery = 60;
 	$scope.dishText = '';
-	$scope.empty = function(){ return Cart.isEmpty(); };
-	$scope.bill = function(){ return Cart.total();};
+	$scope.empty = function(){ return CART_SERVICE.isEmpty(); };
+	$scope.bill = function(){ return CART_SERVICE.total();};
 	$scope.inCondition = function(Tfood){
 		var con4 = Tfood['active'] == true;
 		var con2 = Tfood['half'] == $scope.half;
@@ -88,16 +88,10 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','Cart', function ($scope,Cart) 
 		return con1 && con2 && con3 && con4 ;
 	};
 	$scope.checkout = function(){
-		console.log( Cart.getCart() );
+		//console.log( CART_SERVICE.getCart() );
+		CART_SERVICE.getCatelogue();
+
 	};
-
-
-
-
-
-
-
-
 
 }]).config(function($mdThemingProvider) {
   $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark();
