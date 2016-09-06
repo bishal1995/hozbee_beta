@@ -73,7 +73,8 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 										comCatalogue.push({
 											id : catDet[cat].category_id,
 											name : catDet[cat].category_name,
-											display : false
+											display : false,
+											products : []
 										});
 									}
 								}
@@ -81,13 +82,33 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 									comCatalogue.push({
 										id : catDet[cat].category_id,
 										name : catDet[cat].category_name,
-											display : false
+										display : true,
+										products : []
 									});
 								}
 							};
-							console.log(comCatalogue);					
-
-
+							// Adding products to comCatalogue
+							for ( var ptr in comCatalogue ){
+								// find id from catDet
+								var caPtr = 0;
+								var poPtr = 0;
+								for( var catPtr in catDet ){
+									if( comCatalogue[ptr].id == catDet[catPtr].category_id ){
+										caPtr = catPtr ;
+										for( var fptr in prodDet ){
+											if( catDet[catPtr].food == prodDet[fptr].product ){
+												poPtr = fptr;	
+												comCatalogue[ptr].products.push( prodDet[fptr] );
+											}
+											else
+												continue;
+										}
+									}
+									else
+										continue;
+								}
+							}
+							console.log(comCatalogue);
 						},
 						function(){
 							console.log('Some Error');
