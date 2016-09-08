@@ -4,7 +4,14 @@ hozbee_beta.config(function ($routeProvider) {
 	$routeProvider
 		.when('/foodmain', {
 			templateUrl: 'app/components/foodmain/foodmain.html',
-			controller: 'FoodmainCtrl'
+			controller: 'FoodmainCtrl',
+			resolve : {
+				testser : function(CART_SERVICE){
+					var obj = CART_SERVICE.getCatelogue();
+					return obj ;
+				},
+			}
+
 		})
 		.when('/laundry', {
 			templateUrl: 'app/components/laundry/laundry.html',
@@ -25,3 +32,10 @@ hozbee_beta.config(function ($routeProvider) {
 		;
 	
 });
+
+/*
+				testser : function(CART_SERVICE){
+					var obj = CART_SERVICE.getCatelogue();
+					return obj;
+				},
+*/

@@ -1,10 +1,33 @@
 'use strict';
 
-hozbee_beta.controller('FoodmainCtrl', ['$scope','CART_SERVICE', function ($scope,CART_SERVICE) {
+hozbee_beta.controller('FoodmainCtrl', ['$scope','CART_SERVICE','testser', function ($scope,CART_SERVICE,testser) {
+	// Getting the composite catalogue 	
+	$scope.comCatalogue = testser ;
+	console.log( $scope.comCatalogue  );
+	// Processing the catalogue
+	for ( var ptr in $scope.comCatalogue ){
+
+		console.log( ptr );
+
+		/*
+		for( var foodPtr in $scope.comCatalogue[ptr].products )
+			console.log( $scope.comCatalogue[ptr].products[foodPtr] );
+		*/
+	}
+
+
+
+
+
+
+
+
+
+
  	// Dummy data get them by HTTP get
 	$scope.foods = [];
 	var num = 40;
-	for ( var i=0 ; i < 40 ; i++ ){
+	for ( var i=0 ; i < 4 ; i++ ){
 		$scope.foods.push({
 		    product: String(i),
 		    product_name: "Butter Chicken",
@@ -87,11 +110,7 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','CART_SERVICE', function ($scop
 			var con1 = $scope.MINprice < Tfood['price'] && Tfood['price'] < $scope.MAXprice ;
 		return con1 && con2 && con3 && con4 ;
 	};
-	$scope.checkout = function(){
-		//console.log( CART_SERVICE.getCart() );
-		CART_SERVICE.getCatelogue();
 
-	};
 
 }]).config(function($mdThemingProvider) {
   $mdThemingProvider.theme('dark-grey').backgroundPalette('grey').dark();
@@ -99,3 +118,4 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','CART_SERVICE', function ($scop
   $mdThemingProvider.theme('dark-purple').backgroundPalette('deep-purple').dark();
   $mdThemingProvider.theme('dark-blue').backgroundPalette('blue').dark();
 });
+

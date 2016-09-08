@@ -1,4 +1,7 @@
 .carddemoBasicUsage .card-media {
   background-color: #999999;
 }
-
+.crd{
+	height: 100%;
+	width: 100%;
+}

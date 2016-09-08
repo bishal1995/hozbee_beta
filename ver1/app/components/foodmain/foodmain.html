@@ -11,6 +11,7 @@
 	<div flex="20" ></div>
 </md-content>
 <md-divider></md-divider>
+
 <md-content layout-xs="column" layout="row"  >
     <!-- Free Space -->
     <div flex-xs="" flex-gt-xs="5" layout="column"></div>
@@ -147,7 +148,7 @@
 						Total : &#8377 {{bill()}}/- (Tax Included)
 					</div>
 					<div flex="30">
-						<md-button class="md-raised md-primary" ng-click="checkout()" >Checkout</md-button>
+						<md-button class="md-raised md-primary" ng-click="init()" >Checkout</md-button>
 					</div>
 				</div>
 				</md-divider>
@@ -157,3 +158,45 @@
     <!-- Free Space -->
     <div flex-xs="" flex-gt-xs="1" layout="column"></div>
 </md-content>
+
+	
+
+<div class="row" >
+	<div class="col-md-2" ></div>
+	<div class="col-md-6" >
+		<div class="row" >
+			<div class="col-md-6" >
+
+				<div class="card">
+				  <img class="card-img-top crd" src={{comCatalogue[0].products[0].thumbnail}} alt="Card image cap">
+				  <div class="card-block">
+				  	<div class="row" >
+				  		<div class="col-md-3" > <i class="material-icons red" >radio_button_checked</i> </div>
+				  		<div class="col-md-9" > comCatalogue[0].products[0].product_name </div>
+				  	</div>
+				  	<div class="row" >
+				  		<div class="com-md-8" ></div>
+				  		<div class="com-md-4" ></div>
+				  	</div>
+
+
+				  </div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<div class="col-md-4" ></div>
+
+</div>
+
+
+
+
+<div>
+	<div ng-repeat="obj in comCatalogue" >
+		<div ng-repeat="product in obj.products" >
+			{{ product }}
+		</div><br>
+	</div>	  
+</div>
