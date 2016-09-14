@@ -29,11 +29,8 @@
     <div flex-xs="" flex-gt-xs="50" layout="column">
     	<div ng-repeat="obj in comCatalogue" class="row"  ng-show="obj.display" >
 
-		    <md-toolbar layout="row" class="md-hue-3">
-		      <div class="md-toolbar-tools">
-		        <span> {{ obj.name }} </span>
-		      </div>
-		    </md-toolbar>
+    		<h5> {{ obj.name }} </h5>
+
   			<div class="col-md-6" >  				
 		    	<br>
 		    	<!-- <div ng-repeat="o in obj.products | filter:dishText " ng-if="$even && inCondition(o) " > -->
@@ -159,14 +156,61 @@
 				</div>
 				<md-divider></md-divider>
 				<div layout="row" layout-align="center center" >
-					<div flex="70">
-						Total : &#8377 {{bill()}}/- (Tax Included)
-					</div>
-					<div flex="30">
-						<md-button class="md-raised md-primary" ng-click="checkout()" >Checkout</md-button>
+					<div flex="100"><br><br>
+						<center> Total : &#8377 {{bill()}}/- (Tax Included) </center> <br><br>
 					</div>
 				</div>
-				</md-divider>
+				<md-divider></md-divider>
+				<!-- Address selection--> 
+				<div class="row" >
+					<div class="col-md-1" ></div>
+					<div class="col-md-10" >
+						
+						<h2 class="pull-left" ><b>Select address.</b></h2><br><br><br><hr>
+						<md-radio-group ng-model="address">
+
+							<md-radio-button ng-repeat = "add in addresses" ng-value = add.add_id arai-level = {{add.add_id}} >
+							  {{ add.building }} , Room no. : {{ add.room }} , PIN : {{ add.pin }}
+							</md-radio-button>
+							<!-- Build a new add address function here -->
+							<md-radio-button value="new_add" id="op4"><b> New address </b></md-radio-button>
+
+						</md-radio-group>
+						<div class="row" >
+							<div class="col-md-4" >
+								<center >
+								<md-input-container>
+									<label>Building</label>
+									<md-select ng-model="delivery">
+										<md-option ng-repeat="option in buildings" value="{{option}}" >{{option}}</md-option>
+									</md-select>
+								</md-input-container>						
+								</center>
+							</div>
+							<div class="col-md-4" >
+								<center>
+									<md-input-container>
+										<label>Room No:</label>
+										<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 6036" >
+									</md-input-container>
+								</center>					
+							</div>
+							<div class="col-md-4" >
+								<center>
+									<md-input-container>
+										<label>PIN #</label>
+										<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 788010" >
+									</md-input-container>
+								</center>				
+							</div>
+						</div>
+
+					</div>
+					<div class="com-md-1" ></div>					
+				</div>
+				<md-divider></md-divider>
+				<center> <md-button ng-click="checkout()" > Checkout </md-button> </center>
+
     		</md-card-content>
     	</md-card>
     </div>
@@ -177,80 +221,19 @@
 
 <!-- Order Confirmation -->
 <div id="foodModal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content" >
-    <span id="clsFood" class="close" >x</span>
-		<!-- Order Placing -->
-		<div>
-		<h1> <b>Book pickup.</b> </h1><hr class="line" >
-
-			<div class="row" >
-				<!-- Address selection -->
-				<div class="col-md-1" ></div>
-				<div class="col-md-7"  >
-					<h2 class="pull-left" ><b>Select address.</b></h2><br><br><br><hr>
-					<md-radio-group ng-model="address">
-
-						<md-radio-button ng-repeat = "add in addresses" ng-value = add.add_id arai-level = {{add.add_id}} >
-						  {{ add.building }} , Room no. : {{ add.room }} , PIN : {{ add.pin }}
-						</md-radio-button>
-						<!-- Build a new add address function here -->
-						<md-radio-button value="new_add" id="op4"><b> New address </b></md-radio-button>
-
-					</md-radio-group>
-					<div class="row" >
-						<div class="col-md-4" >
-							<center >
-							<md-input-container>
-								<label>Building</label>
-								<md-select ng-model="delivery">
-									<md-option ng-repeat="option in buildings" value="{{option}}" >{{option}}</md-option>
-								</md-select>
-							</md-input-container>						
-							</center>
-						</div>
-						<div class="col-md-4" >
-							<center>
-								<md-input-container>
-									<label>Room No:</label>
-									<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 6036" >
-								</md-input-container>
-							</center>					
-						</div>
-						<div class="col-md-4" >
-							<center>
-								<md-input-container>
-									<label>PIN #</label>
-									<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 788010" >
-								</md-input-container>
-							</center>				
-						</div>
-					</div>
-				</div>
-				<!--  -->
-				<div class="col-md-3" >
-					<h2> Hola </h2>
-					
-				</div>
-				<div class="col-md-1" ></div>
-			</div>
-		<br>
+	<div class="modal-content" >
+		<span id="clsFood" class="close">x</span>
 		<div class="row" >
-			<div class="col-md-1" ></div>
-			<div class="col-md-8" >
-				<b> <h3>Guidilines</h3> </b>
-	          <ul>
-	          	<li> Select atleast one service type to confirm your booking. You may select more than one. </li>
-	          	<li> Defult date is the same day if service booked till 2PM of the day. Else you may select any day convenient to you. </li>
-	          </ul>
-
-
-			</div>
-			<div class="col-md-3" ></div>
-
+			  <div class="col-md-4" ></div>
+		  <div class="col-md-4" >
+		  	<h3> <b>Order Details.</b> </h3>
+		  	<p>
+		  		Order Id : {{ cnfOrder.id }}  <br>
+		  	</p>
+		  	<center><md-button class="md-raised md-primary" ng-click="gotoOrders()" >Trace Orders</md-button></center>	  	
+		  </div>
+			  <div class="col-md-4" ></div>
 		</div>
-		</div>
-  </div>
+	</div>
 </div>
 

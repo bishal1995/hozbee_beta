@@ -1,10 +1,24 @@
 'use strict';
 
-hozbee_beta.controller('FoodmainCtrl', ['$scope','CART_SERVICE','USER_SERVICE','CNFCART','testser', function ($scope,CART_SERVICE,USER_SERVICE,CNFCART,testser) {
+hozbee_beta.controller('FoodmainCtrl', ['$scope','$location','CART_SERVICE','USER_SERVICE','CNFCART','testser', function ($scope,$location,CART_SERVICE,USER_SERVICE,CNFCART,testser) {
 	// Getting the composite catalogue 	
 	$scope.comCatalogue = testser ;
+	$scope.addresses = USER_SERVICE.getInfo().address;
+	$scope.buildings = [ 
+						'Hostel-1',	
+						'Hostel-2',	
+						'Hostel-3',	
+						'Hostel-4',	
+						'Hostel-5',	
+						'Hostel-6',	
+						'Hostel-7',	
+						'Hostel-8',	
+						'Hostel-9',	
+						'GH-1',	
+						'GH-2',	
+					 ];
+	$scope.address = '';				 
 	console.log( $scope.comCatalogue  );
-
 	//Process data and create 
 	var date = new Date();
 	$scope.time = CART_SERVICE.strtime(date.toTimeString().substr(0,8));
@@ -61,6 +75,10 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','CART_SERVICE','USER_SERVICE','
 	span.onclick = function() {
 	    modal.style.display = "none";
 	}
+	$scope.gotoOrders = function(){
+		$location.path('orders');
+	};
+	$scope.cnfOrder = CART_SERVICE.getCnfOrder();
 	// Checkout
 	$scope.checkout = function(){
 		CART_SERVICE.createCart(CART_SERVICE.getCart())
@@ -69,12 +87,12 @@ hozbee_beta.controller('FoodmainCtrl', ['$scope','CART_SERVICE','USER_SERVICE','
 					CART_SERVICE.setCnfCart(response.data.cart_id);
 					CART_SERVICE.confirmCart( CART_SERVICE.getCnfCart() );
 					console.log( CART_SERVICE.getCnfOrder() );
+					modal.style.display = "block";
 				},
 				function(){
 					console.log('Some Error Occured');
 				}
 			);
-
 	}
 
 }]);

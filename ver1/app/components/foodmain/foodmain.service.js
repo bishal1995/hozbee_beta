@@ -20,7 +20,7 @@ hozbee_beta.value('CNFORDER',{
 hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERVICE','CNFCART','$http',function ($window,API_CONF,FOOD_CONF,USER_SERVICE,CNFCART,$http) {
 	// Initial Empty cart
 	var CnfCart = { id : 0 };
-	var CnfOrderDet = {};
+	var CnfOrderDet = { id : '' };
 	var cart = [];
 	var CartDetails = [];
 	return {
@@ -314,7 +314,7 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 			$http(config)
 				.then(
 					function(response){
-						CnfOrderDet = response.data;
+						CnfOrderDet.id = response.data.Corder_id  ;
 					},
 					function(){
 						console.log('Some Error');
