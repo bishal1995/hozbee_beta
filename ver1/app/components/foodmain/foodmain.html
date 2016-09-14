@@ -1,5 +1,6 @@
 <md-content>
 	<center><h3>*********  Food Order has never been so easy at NIT Silchar, Order Now from various varieties of standardised at HOZBEE  *********</h3></center>
+	{{ CNFCART }}
 </md-content>
 <md-content layout-xs="column" layout="row" class="md-padding">	
 	<div flex="20" > </div>
@@ -14,82 +15,98 @@
 
 <md-content layout-xs="column" layout="row"  >
     <!-- Free Space -->
-    <div flex-xs="" flex-gt-xs="5" layout="column"></div>
-    <!-- Category Table -->
-    <div flex-xs="" flex-gt-xs="15" layout="column"></div>
+    <div flex-xs="" flex-gt-xs="20" layout="column" class="category32" >    	
+		<md-content>
+			<md-subheader class="md-no-sticky"> Categories </md-subheader>
+			<md-list-item class="md-3-line" ng-repeat="category in comCatalogue" ng-click="enableCategory(category.id)">
+				<div class="md-list-item-text nopadd" layout="column">
+				<h3>{{ category.name }}</h3>
+				</div>
+			</md-list-item>
+		</md-content>
+    </div>    	
+    <!-- Product details -->
+    <div flex-xs="" flex-gt-xs="50" layout="column">
+    	<div ng-repeat="obj in comCatalogue" class="row"  ng-show="obj.display" >
 
-    <div flex-xs="" flex-gt-xs="25" layout="column">
-    	
-    	<br>
-    	<div ng-repeat="o in products | filter:dishText " ng-if="$even && inCondition(o)" >  
-			<md-card>
-			<img ng-src = {{o["thumbnail"]}} >
-			<div layout="row" >
-				<md-card-title > 
-					<div flex="20"> <i class="material-icons red" >radio_button_checked</i> </div>
-					<div flex="80"> <b>{{ o["product_name"] }} </b> </div>
-				</md-card-title>
-			</div>
-			<md-divider></md-divider>
-			<div layout="row" layout-fill>
-				<div flex="65">
-					 <md-card-content>
-							<md-radio-group ng-model = o["is_half"] ng-change="change($index)" >
-								<md-radio-button value="1" > Half <b> &#8377  {{ o["half_price"] }}/- </b> </md-radio-button>
-								<md-radio-button value="0"> Full <b> &#8377 {{ o["price"] }} /- </b></md-radio-button>
-							</md-radio-group>
-					 </md-card-content>
-				</div>
-				<div flex="35">
-					<md-card-actions layout="row" layout-align="center center">
-						<md-button ng-click="add(o['product'],o['is_half'],o['product_name'],$index)" aria-label="Add in cart"> <i class="fa fa-fw fa-plus-circle fa-5x "></i> </md-button>					
-					</md-card-actions>					
-				</div>
-			</div>
-			</md-card>    	
-		</div>
-    </div>
-    <div flex-xs="" flex-gt-xs="25" layout="column">
-    	<br>
-    	<div ng-repeat="o in products | filter:dishText" ng-if="$odd && inCondition(o)" >	
-			<md-card>
-			<img ng-src = {{o["thumbnail"]}} >
-			<div layout="row" >
-				<md-card-title> 
-					<div flex="20"> <i class="material-icons red" >radio_button_checked</i> </div>
-					<div flex="80"> <b>{{ o["product_name"] }} </b> </div>
-				</md-card-title>
-			</div>
-			<md-divider></md-divider>
-			<div layout="row" >
-				<div flex="65">
-					 <md-card-content>
-							<md-radio-group ng-model = o["is_half"] ng-change="change($index)"  >
-								<md-radio-button value="1" > Half <b> &#8377  {{ o["half_price"] }}/- </b> </md-radio-button>
-								<md-radio-button value="0"> Full <b> &#8377 {{ o["price"] }} /- </b></md-radio-button>
-							</md-radio-group>
-					 </md-card-content>
-				</div>
-				<div flex="35">
-					<md-card-actions layout="row" layout-align="center center">
-						<md-button ng-click="add(o['product'],o['is_half'],o['product_name'],$index)" aria-label="Add in cart"> <i class="fa fa-fw fa-plus-circle fa-5x "></i> </md-button>					
-					</md-card-actions>					
-				</div>
-			</div>
-			</md-card>  	
-		</div>
+		    <md-toolbar layout="row" class="md-hue-3">
+		      <div class="md-toolbar-tools">
+		        <span> {{ obj.name }} </span>
+		      </div>
+		    </md-toolbar>
+  			<div class="col-md-6" >  				
+		    	<br>
+		    	<!-- <div ng-repeat="o in obj.products | filter:dishText " ng-if="$even && inCondition(o) " > -->
+		    	<div ng-repeat="o in obj.products | filter:dishText " ng-if="$even" >  
+					<md-card>
+					<img ng-src = {{o["thumbnail"]}} >
+					<div layout="row" >
+						<md-card-title > 
+							<div flex="20"> <i class="material-icons red" >radio_button_checked</i> </div>
+							<div flex="80"> <b>{{ o["product_name"] }} </b> </div>
+						</md-card-title>
+					</div>
+					<md-divider></md-divider>
+					<div layout="row" layout-fill>
+						<div flex="65">
+							 <md-card-content>
+									<md-radio-group ng-model = o["half_avail"] ng-change="change($index)" >
+										<md-radio-button value="1" > Half <b> &#8377  {{ o["half_price"] }}/- </b> </md-radio-button>
+										<md-radio-button value="0"> Full <b> &#8377 {{ o["price"] }} /- </b></md-radio-button>
+									</md-radio-group>
+							 </md-card-content>
+						</div>
+						<div flex="35">
+							<md-card-actions layout="row" layout-align="center center">
+								<md-button ng-click="add(o['product'],o['half_avail'],o['product_name'],o,$index)" aria-label="Add in cart"> <i class="fa fa-fw fa-plus-circle fa-5x "></i> </md-button>					
+							</md-card-actions>					
+						</div>
+					</div>
+					</md-card>    	
+				</div>  				
+  			</div>
+  			<div class="col-md-6" >
+		    	<br>
+		    	<!-- <div ng-repeat="o in obj.products | filter:dishText" ng-if="$odd && inCondition(o)" > -->
+		    	<div ng-repeat="o in obj.products | filter:dishText" ng-if="$odd" >	
+					<md-card>
+					<img ng-src = {{o["thumbnail"]}} >
+					<div layout="row" >
+						<md-card-title> 
+							<div flex="20"> <i class="material-icons red" >radio_button_checked</i> </div>
+							<div flex="80"> <b>{{ o["product_name"] }} </b> </div>
+						</md-card-title>
+					</div>
+					<md-divider></md-divider>
+					<div layout="row" >
+						<div flex="65">
+							 <md-card-content>
+									<md-radio-group ng-model = o["half_avail"] ng-change="change($index)"  >
+										<md-radio-button value="1" > Half <b> &#8377  {{ o["half_price"] }}/- </b> </md-radio-button>
+										<md-radio-button value="0"> Full <b> &#8377 {{ o["price"] }} /- </b></md-radio-button>
+									</md-radio-group>
+							 </md-card-content>
+						</div>
+						<div flex="35">
+							<md-card-actions layout="row" layout-align="center center">
+								<md-button ng-click="add(o['product'],o['half_avail'],o['product_name'],o,$index)" aria-label="Add in cart"> <i class="fa fa-fw fa-plus-circle fa-5x "></i> </md-button>					
+							</md-card-actions>					
+						</div>
+					</div>
+					</md-card>  	
+				</div>  				
+  			</div> 
+    	</div>
     </div>
     <!-- Customer Orders -->
     <div flex-xs="" flex-gt-xs="35" layout="column" id="side-bar" >
     	<br>
     	<!-- Filter foods -->
     	<md-card>
-
     		<md-card-title>
     			<h3> Filter By </h3>
     		</md-card-title>
-    		<md-divider></md-divider>    		
-
+    		<md-divider></md-divider>
 	   		<md-card-content>
 				<p layout="row" layout-align="center center" >
 					<md-input-container flex="33" >
@@ -98,7 +115,6 @@
 							<md-option ng-repeat="option in deliveryOptions" value="{{option}}" >{{option}} min </md-option>
 						</md-select>
 					</md-input-container>
-
 					<md-slider-container flex="66" >
 						<span>&#8377</span>
 						<md-slider md-discrete flex min="0" max="500" ng-model="MAXprice" aria-label="red" step="5" id="red-slider"></md-slider>
@@ -106,21 +122,20 @@
 							<input flex type="number" ng-model="MAXprice" aria-label="red" aria-controls="red-slider">
 						</md-input-container>
 					</md-slider-container>
-
 				</p>
 				<div layout="row" >
 					<p flex="33" >
-						<md-switch ng-model="veg" aria-label="Veg" ng-true-value="'true'" ng-false-value="'false'" class="md-warn">
+						<md-switch ng-model="veg" aria-label="Veg" ng-true-value="true" ng-false-value="false" class="md-warn">
 						Veg
 						</md-switch>
 					</p>
 					<p flex="33" >
-						<md-switch ng-model="half" aria-label="Half" ng-true-value="'true'" ng-false-value="'false'" class="md-warn">
+						<md-switch ng-model="half" aria-label="Half" ng-true-value="true" ng-false-value="false" class="md-warn">
 						Non-Veg
 						</md-switch>	
 					</p>
 					<p flex="33" >
-						<md-switch ng-model="half" aria-label="Half" ng-true-value="'true'" ng-false-value="'false'" class="md-warn">
+						<md-switch ng-model="half" aria-label="Half" ng-true-value="true" ng-false-value="false" class="md-warn">
 						Half
 						</md-switch>	
 					</p>
@@ -139,7 +154,7 @@
 						<div flex="10"> {{ order['quantity'] }} </div>
 						<div flex="10"> {{ order['half'] }} </div>
 						<div flex="20">  &#8377 {{ order['bill'] }} </div>
-						<div flex="10"><md-button class="md-icon-button"  ng-click="eadd(order)" ><i class="fa fa-fw fa-plus-circle fa-2x green" ></i></md-button></div>
+						<div flex="10"><md-button class="md-icon-button"  ng-click="eadd(order['product'])" ><i class="fa fa-fw fa-plus-circle fa-2x green" ></i></md-button></div>
 						<div flex="10"><md-button class="md-icon-button" ng-click="uremove(order['product'])" ><i class="fa fa-fw fa-minus-circle fa-2x red "></i></md-button></div>
 				</div>
 				<md-divider></md-divider>
@@ -148,7 +163,7 @@
 						Total : &#8377 {{bill()}}/- (Tax Included)
 					</div>
 					<div flex="30">
-						<md-button class="md-raised md-primary" ng-click="init()" >Checkout</md-button>
+						<md-button class="md-raised md-primary" ng-click="checkout()" >Checkout</md-button>
 					</div>
 				</div>
 				</md-divider>
@@ -159,44 +174,83 @@
     <div flex-xs="" flex-gt-xs="1" layout="column"></div>
 </md-content>
 
-	
 
-<div class="row" >
-	<div class="col-md-2" ></div>
-	<div class="col-md-6" >
-		<div class="row" >
-			<div class="col-md-6" >
+<!-- Order Confirmation -->
+<div id="foodModal" class="modal">
 
-				<div class="card">
-				  <img class="card-img-top crd" src={{comCatalogue[0].products[0].thumbnail}} alt="Card image cap">
-				  <div class="card-block">
-				  	<div class="row" >
-				  		<div class="col-md-3" > <i class="material-icons red" >radio_button_checked</i> </div>
-				  		<div class="col-md-9" > comCatalogue[0].products[0].product_name </div>
-				  	</div>
-				  	<div class="row" >
-				  		<div class="com-md-8" ></div>
-				  		<div class="com-md-4" ></div>
-				  	</div>
+  <!-- Modal content -->
+  <div class="modal-content" >
+    <span id="clsFood" class="close" >x</span>
+		<!-- Order Placing -->
+		<div>
+		<h1> <b>Book pickup.</b> </h1><hr class="line" >
 
+			<div class="row" >
+				<!-- Address selection -->
+				<div class="col-md-1" ></div>
+				<div class="col-md-7"  >
+					<h2 class="pull-left" ><b>Select address.</b></h2><br><br><br><hr>
+					<md-radio-group ng-model="address">
 
-				  </div>
+						<md-radio-button ng-repeat = "add in addresses" ng-value = add.add_id arai-level = {{add.add_id}} >
+						  {{ add.building }} , Room no. : {{ add.room }} , PIN : {{ add.pin }}
+						</md-radio-button>
+						<!-- Build a new add address function here -->
+						<md-radio-button value="new_add" id="op4"><b> New address </b></md-radio-button>
+
+					</md-radio-group>
+					<div class="row" >
+						<div class="col-md-4" >
+							<center >
+							<md-input-container>
+								<label>Building</label>
+								<md-select ng-model="delivery">
+									<md-option ng-repeat="option in buildings" value="{{option}}" >{{option}}</md-option>
+								</md-select>
+							</md-input-container>						
+							</center>
+						</div>
+						<div class="col-md-4" >
+							<center>
+								<md-input-container>
+									<label>Room No:</label>
+									<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 6036" >
+								</md-input-container>
+							</center>					
+						</div>
+						<div class="col-md-4" >
+							<center>
+								<md-input-container>
+									<label>PIN #</label>
+									<input flex type="text" ng-model="room" aria-label="red" aria-controls="red-slider" placeholder="eg : 788010" >
+								</md-input-container>
+							</center>				
+						</div>
+					</div>
 				</div>
-				
+				<!--  -->
+				<div class="col-md-3" >
+					<h2> Hola </h2>
+					
+				</div>
+				<div class="col-md-1" ></div>
 			</div>
+		<br>
+		<div class="row" >
+			<div class="col-md-1" ></div>
+			<div class="col-md-8" >
+				<b> <h3>Guidilines</h3> </b>
+	          <ul>
+	          	<li> Select atleast one service type to confirm your booking. You may select more than one. </li>
+	          	<li> Defult date is the same day if service booked till 2PM of the day. Else you may select any day convenient to you. </li>
+	          </ul>
+
+
+			</div>
+			<div class="col-md-3" ></div>
+
 		</div>
-	</div>
-	<div class="col-md-4" ></div>
-
+		</div>
+  </div>
 </div>
 
-
-
-
-<div>
-	<div ng-repeat="obj in comCatalogue" >
-		<div ng-repeat="product in obj.products" >
-			{{ product }}
-		</div><br>
-	</div>	  
-</div>

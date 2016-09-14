@@ -8,14 +8,19 @@ hozbee_beta.constant('FOOD_CONF',{
 });
 // Cart Content
 hozbee_beta.value('CART_CONTENT',{
-	cart : {},
+	orders : [],
+});
+hozbee_beta.value('CNFCART', {
+	id : '0',
 });
 hozbee_beta.value('CNFORDER',{
 	key :'value',
 });
 // cart servcice
-hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERVICE','$http',function ($window,API_CONF,FOOD_CONF,USER_SERVICE,$http) {
+hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERVICE','CNFCART','$http',function ($window,API_CONF,FOOD_CONF,USER_SERVICE,CNFCART,$http) {
 	// Initial Empty cart
+	var CnfCart = { id : 0 };
+	var CnfOrderDet = {};
 	var cart = [];
 	var CartDetails = [];
 	return {
@@ -70,7 +75,7 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 									comCatalogue.push({
 										id : catDet[cat].category_id,
 										name : catDet[cat].category_name,
-										display : true,
+										display : true ,
 										products : []
 									});
 								}
@@ -95,7 +100,9 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 									for( var fptr in prodDet ){
 										if( catDet[catPtr].food == prodDet[fptr].product ){
 											poPtr = fptr;	
-											comCatalogue[ptr].products.push( prodDet[fptr] );
+											var newProduct = prodDet[fptr];
+											newProduct.half_avail = "0";
+											comCatalogue[ptr].products.push( newProduct );
 										}
 										else
 											continue;
@@ -112,14 +119,15 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 				);
 				return comCatalogue ;
 		},
-		adds : function(product_id,price){
-			for ( var item in cart ){
-				if(cart[item]["product"] == product_id ){
-					var quantity = parseFloat( cart[item]["quantity"] ) + 1 ;
-					cart[item]["quantity"] = String(quantity);
-					CartDetails[item]["quantity"] = String(quantity);
-					CartDetails[item]["bill"] =  Math.ceil(parseFloat(price)*quantity * 100)/100; 
-					break;
+		adds : function(product){
+			for ( var j in cart ){
+				if(cart[j]["product"] == product ){
+						var Unit = CartDetails[j]["bill"] / parseFloat( cart[j]["quantity"] ) ;
+						var quantity = parseFloat( cart[j]["quantity"] ) + 1 ;
+						cart[j]["quantity"] = String(quantity) ;
+						CartDetails[j]["quantity"] = String(quantity) ;
+						CartDetails[j]["bill"] =  Math.ceil((CartDetails[j]["bill"] + Unit) * 100)/100;	
+					break;						
 				}
 				else
 					continue;
@@ -165,14 +173,13 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 							product : product_id,
 							food_name : name,
 							quantity : "1",
-							half : 'H`',
+							half : 'H',
 							bill : price
 						});
 					}
 				}
 				else
-					var foo = 1 ;
-					
+					var foo = 1 ;					
 			}
 			else{
 				cart.push({
@@ -194,7 +201,7 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 						product : product_id,
 						food_name : name,
 						quantity : "1",
-						half : 'H`',
+						half : 'H',
 						bill : price
 					});
 				}
@@ -263,6 +270,59 @@ hozbee_beta.factory('CART_SERVICE', ['$window','API_CONF','FOOD_CONF','USER_SERV
 				return true;
 			else
 				return false;
+		},
+		createCart : function(cartContent){
+			var headers = {
+				'Authorization' : 'Token ' + USER_SERVICE.getToken()
+			};
+			var CartData = {
+				orders : cartContent
+			};
+			var config = {
+				method : 'POST',
+				url :  API_CONF._API_ + FOOD_CONF._ADDCART_API_,
+				data : CartData,
+				headers : headers
+			};
+			return $http(config);
+		},
+		getCnfCart : function(){
+			return CnfCart;
+		},
+		setCnfCart : function(id){
+			CnfCart.id = id;
+		},
+		confirmCart : function(obj){
+
+			//$scope.$apply(function() {});
+			
+			var headers = {
+				'Authorization' : 'Token ' + USER_SERVICE.getToken()
+			};
+			var OrderObj = {
+				cart : obj.id ,
+				address : 1,
+				payment_mode : 'COD'
+			};
+			var config = {
+				method : 'POST',
+				url :  API_CONF._API_ + FOOD_CONF._CNFCART_API_ ,
+				data : OrderObj ,
+				headers : headers
+			};
+
+			$http(config)
+				.then(
+					function(response){
+						CnfOrderDet = response.data;
+					},
+					function(){
+						console.log('Some Error');
+					}
+				);
+		},
+		getCnfOrder : function(){
+			return CnfOrderDet ;
 		}
 	};
-}]); 
+}]);
